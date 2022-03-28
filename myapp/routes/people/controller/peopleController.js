@@ -15,10 +15,11 @@ const getAllPeople = async (req, res) => {
 const createPerson = async (req, res) => {
     try {
       console.log(req.body);
-      const { name, age, favoriteMovies } = req.body;
+      const { name, age, email, favoriteMovies } = req.body;
       const newPerson = new People({
         name: name,
         age: age,
+        email: email,
         favoriteMovies: favoriteMovies,
       });
       const savedPerson = await newPerson.save();

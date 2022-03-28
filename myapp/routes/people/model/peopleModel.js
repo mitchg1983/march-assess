@@ -4,6 +4,7 @@ const peopleSchema = new mongoose.Schema({
   id: String,
   name: String,
   age: Number,
+  email: String,
   favoriteMovies: [],
   date: {
     type: Date,
