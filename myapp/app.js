@@ -1,13 +1,35 @@
 var createError = require('http-errors');
 var express = require('express');
+
+const cors = require('cors');
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+var app = express();
+
+app.use(cors({
+  origin: '*'
+}));
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+  console.log("You have connected your mongodb for march-assess");
+})
+  .catch((error) => {
+    console.log("We have a problem, the error is...", error);
+  });
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
