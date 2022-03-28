@@ -49,33 +49,44 @@ const updatePerson = async (req, res) => {
       req.body,
       { new: true }
     );
-    res
-      .status(200)
-      .json({
-        message: "This person has been updated.",
-        payload: updatedPerson,
-      });
+    res.status(200).json({
+      message: "This person has been updated.",
+      payload: updatedPerson,
+    });
   } catch (error) {
     res.status(500).json({ error: errorHandler(error) });
   }
 };
 
 const getOnePerson = async (req, res) => {
-    try {
-        const { id } = req.params;
-        let foundPerson = await People.findById(id);
-        res.status(200).json({ 
-            message: "Person found.",
-            payload: foundPerson,
-        })
-    } catch (error) {
-        res.status(500).json(error);
-    }
-}
+  try {
+    const { id } = req.params;
+    let foundPerson = await People.findById(id);
+    res.status(200).json({
+      message: "Person found.",
+      payload: foundPerson,
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+const deletePerson = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let deletedPerson = await People.findByIdAndDelete(id);
+    res
+      .status(200)
+      .json({ message: "Person deleted.", payload: deletedPerson });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 module.exports = {
   getAllPeople,
   createPerson,
   updatePerson,
-  getOnePerson
+  getOnePerson,
+  deletePerson,
 };
