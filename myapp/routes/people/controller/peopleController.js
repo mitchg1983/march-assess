@@ -1,4 +1,5 @@
 const People = require("../model/peopleModel");
+const errorHandler = require("../utils/errorHandler");
 
 const getAllPeople = async (req, res) => {
     console.log("Beginning getAllPeople");
@@ -40,9 +41,24 @@ const createPerson = async (req, res) => {
       });
     }
   };
+
+
+const updatePerson = async (req, res) => {
+    try {
+        const updatedPerson = await People.findOneAndUpdate(
+            { email: req.body.email },
+            req.body,
+            { new: true }
+        );
+        res.status(200).json({ message: "This person has been updated.", payload: updatedPerson });
+    } catch (error) {
+        res.status(500).json({ error: errorHandler(error) })
+    }
+}
   
 
 module.exports = {
     getAllPeople,
     createPerson,
+    updatePerson,
 };
