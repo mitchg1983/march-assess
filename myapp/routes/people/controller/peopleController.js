@@ -14,14 +14,16 @@ const getAllPeople = async (req, res) => {
 };
 
 const createPerson = async (req, res) => {
+  console.log("Starting createPerson")
   try {
-    console.log(req.body);
-    const { name, age, email, favoriteMovies } = req.body;
+    // console.log(req);
+    // console.log(req.body);
+    const { name, age, email } = req.body;
     const newPerson = new People({
       name: name,
       age: age,
       email: email,
-      favoriteMovies: favoriteMovies,
+      // favoriteMovies: favoriteMovies,
     });
     const savedPerson = await newPerson.save();
     res.status(200).json({
@@ -35,7 +37,7 @@ const createPerson = async (req, res) => {
         error: `duplicate?`,
       });
     }
-    res.json({
+    res.status(500).json({
       message: "There is an error......",
       error: error.errors,
     });

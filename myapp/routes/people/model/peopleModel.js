@@ -5,7 +5,7 @@ const peopleSchema = new mongoose.Schema({
   name: String,
   age: Number,
   email: String,
-  favoriteMovies: [],
+  // favoriteMovies: [],
   date: {
     type: Date,
     default: Date.now,
