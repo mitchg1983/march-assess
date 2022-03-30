@@ -18,12 +18,12 @@ const createPerson = async (req, res) => {
   try {
     // console.log(req);
     // console.log(req.body);
-    const { name, age, email } = req.body;
+    const { name, age, email, favoriteMovies } = req.body;
     const newPerson = new People({
       name: name,
       age: age,
       email: email,
-      // favoriteMovies: favoriteMovies,
+      favoriteMovies: favoriteMovies,
     });
     const savedPerson = await newPerson.save();
     res.status(200).json({
